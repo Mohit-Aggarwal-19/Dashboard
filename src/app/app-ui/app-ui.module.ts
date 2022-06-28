@@ -8,6 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 const uiModules = [
   BrowserAnimationsModule,
   MatPaginatorModule,
@@ -17,6 +18,7 @@ const uiModules = [
   MatButtonModule,
   MatIconModule,
   MatSidenavModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

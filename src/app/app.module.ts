@@ -7,9 +7,12 @@ import { AppComponent } from './app.component';
 import { TablesComponent } from './tables/tables.component';
 import { ChartsComponent } from './charts/charts.component';
 import { NullComponent } from './null/null.component';
-import {HttpClientModule} from '@angular/common/http';
 
+import {HttpClientModule} from '@angular/common/http';
 import { AppUiModule } from './app-ui/app-ui.module';
+import { HighchartsChartModule } from 'highcharts-angular';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,7 @@ import { AppUiModule } from './app-ui/app-ui.module';
     AppRoutingModule,
     HttpClientModule,
     AppUiModule,
-    
+    HighchartsChartModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

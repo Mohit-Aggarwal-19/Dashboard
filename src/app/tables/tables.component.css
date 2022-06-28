@@ -18,3 +18,9 @@ td {
 .mat-column-Last_Update {
     width: 10em !important;
 }
+
+.scrollable{
+    height: 45em;
+  max-width: 100%;
+  overflow: auto;
+  }
