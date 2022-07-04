@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { TablesComponent } from './tables/tables.component';
 import { ChartsComponent } from './charts/charts.component';
 import { NullComponent } from './null/null.component';
+import { DummyComponent } from './dummy/dummy.component';
 const routes: Routes = [
   { path: 'Tables', component: TablesComponent },
   { path: 'Charts', component: ChartsComponent },
-  { path: '**', component: NullComponent },
+  { path: 'dummy', component: DummyComponent },
 ];
 
 @NgModule({

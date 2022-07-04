@@ -1,13 +1,12 @@
-
 <div class="page-container">
   <header>
     <div>
       <button mat-button class="menu-button" (click)="sidenav.toggle()">
-        <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+        <mat-icon>{{ isMenuOpen ? "menu_open" : "menu" }}</mat-icon>
       </button>
-      
+
       <a routerLink="/">
-        <span class="app-title">{{title}}</span>
+        <span class="app-title">{{ title }}</span>
       </a>
     </div>
   </header>
@@ -16,9 +15,8 @@
       <a mat-raised-button (click)="onClickDisplayTable()">Table</a>
       <a mat-raised-button (click)="onClickDisplayCharts()">charts</a>
       <a mat-raised-button (click)="onClickDisplayData()">Data</a>
-     
     </mat-sidenav>
-    <mat-sidenav-content style="overflow: hidden;">
+    <mat-sidenav-content>
       <main>
         <router-outlet></router-outlet>
       </main>

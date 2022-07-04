@@ -1,164 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import HC_exporting from 'highcharts/modules/exporting';
-import { IRootObject } from '../Interfaces/rootObject';
-import { FetchDataFromApiService } from '../services/fetch-data-from-api.service';
+
+import { FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-null',
   templateUrl: './null.component.html',
   styleUrls: ['./null.component.css'],
 })
-export class NullComponent implements OnInit{
-  Highchart: typeof Highcharts = Highcharts; // required
+export class NullComponent implements OnInit {
+  constructor() {}
+  ngOnInit(): void {}
 
-  pieChartForNonChinaOption = {};
-  pieChartForChinaOption = {};
-  pieChartForGlobalOption = {};
-
-  chartOptions = {};
-  public data?: IRootObject;
-
-  constructor(private _fetchData: FetchDataFromApiService) {}
-
-  ngOnInit(): void {
-    this._fetchData.getData().subscribe((res) => {
-      this.data = res;
-      // console.log(this.summary);
-      // console.log(this.summary['global']);
-      // console.log(this.summary['nonChina']);
-      // console.log(this.summary['china']);
-      // this.confirmed = this.summary['nonChina']['conformed'];
-      // this.deaths = this.summary['nonChina']['deaths'];
-      // this.recovered = this.summary['nonChina']['recovered'];
-
-      if (this.data) {
-        const dataForNoChina = [
-          {
-            name: 'Deaths',
-            y: this.data['summaryStats'].nonChina?.deaths,
-          },
-          {
-            name: 'Confirmed',
-            y: this.data['summaryStats'].nonChina?.confirmed,
-          },
-          {
-            name: 'Recovered',
-            y: this.data['summaryStats'].nonChina?.recovered,
-          },
-        ];
-        const dataForChina = [
-          {
-            name: 'Deaths',
-            y: this.data['summaryStats'].china?.deaths,
-          },
-          {
-            name: 'Confirmed',
-            y: this.data['summaryStats'].china?.confirmed,
-          },
-          {
-            name: 'Recovered',
-            y: this.data['summaryStats'].china?.recovered,
-          },
-        ];
-        const dataForGlobal = [
-          {
-            name: 'Deaths',
-            y: this.data['summaryStats'].global?.deaths,
-          },
-          {
-            name: 'Confirmed',
-            y: this.data['summaryStats'].global?.confirmed,
-          },
-          {
-            name: 'Recovered',
-            y: this.data['summaryStats'].global?.recovered,
-          },
-        ];
-
-        this.pieChartForNonChinaOption = Highcharts.chart('nonChinacontainer', {
-          chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie',
-          },
-          title: {
-            text: 'Summary for Non-China',
-          },
-          subtitle: {
-            text: '3D donut in Highcharts',
-          },
-          plotOptions: {
-            pie: {
-              innerSize: 100,
-              depth: 45,
-            },
-          },
-          series: [
-            {
-              name: 'count',
-              data: dataForNoChina,
-            },
-          ],
-        } as any);
-
-        this.pieChartForChinaOption = Highcharts.chart('chinaContainer', {
-          chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie',
-          },
-          title: {
-            text: 'Summary for China',
-          },
-          subtitle: {
-            text: '3D donut in Highcharts',
-          },
-          plotOptions: {
-            pie: {
-              innerSize: 100,
-              depth: 45,
-            },
-          },
-          series: [
-            {
-              name: 'count',
-              data: dataForChina,
-            },
-          ],
-        } as any);
-        this.pieChartForGlobalOption=Highcharts.chart('globalContainer', {
-          chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie',
-          },
-          title: {
-            text: 'Summary for Global',
-          },
-          subtitle: {
-            text: '3D donut in Highcharts',
-          },
-          plotOptions: {
-            pie: {
-              innerSize: 100,
-              depth: 45,
-            },
-          },
-          series: [
-            {
-              name: 'count',
-              data: dataForGlobal,
-            },
-          ],
-        } as any);
-      }
-
-      HC_exporting(this.Highchart);
-    });
+  public NrawDataHeader!: string[];
+  public disableSelect = new FormControl({ value: '', disabled: true });
+  public headings = new FormControl('');
+  public headers: Array<any> = [
+    'Admin2',
+    'Province_State',
+    'Last_Update',
+    'Confirmed',
+    'Deaths',
+    'Recovered',
+    'Active',
+    'Combined_Key',
+    'Incident_Rate',
+  ];
+  onSelectOption(ev: Event,selected:boolean) {
+    console.log('present header values', this.headings.value);
+    if (this.headings.value) 
+    {
+      this.NrawDataHeader.push(this.headings.value);
+      console.log(this.headings.value);
+      // console.log("updated raw header",this.rawDataHeader);
+      // console.log("last of raw header",this.rawDataHeader[this.rawDataHeader.length-1])
+      this.NrawDataHeader = this.NrawDataHeader.flat();
+      console.log('flat raw header', this.NrawDataHeader);
+    } 
+    else !this.headings.value;
+    {
+      this.NrawDataHeader.pop();
+    }
   }
-  
+ 
+  onInitialRawDataHeader(data: string[]) {
+    
+    console.log('data', data);
+    console.log("On Initial Raw data header",this.NrawDataHeader)
+    this.NrawDataHeader = data;
+    this.NrawDataHeader = this.NrawDataHeader.flat();
+    console.log(this.NrawDataHeader);
+  }
 }

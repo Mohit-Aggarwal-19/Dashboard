@@ -1,157 +1,100 @@
- <table mat-table [dataSource]="dataSource">
+<div *ngIf="!isDataPresent" class="setMatScrollerToCenter">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="isDataPresent" class="scrollable">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <!-- Position Column -->
+    <ng-container matColumnDef="FIPS">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef>FIPS</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.FIPS === "" ? "-" : element.FIPS }}
+      </td>
+    </ng-container>
 
-        <!-- FIPS Column -->
-        <ng-container matColumnDef="FIPS">
-            <th mat-header-cell *matHeaderCellDef>
-                FIPS
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.FIPS === ""? "-":element.FIPS}} </td>
-        </ng-container>
+    <!-- Admin2 Column -->
 
-        <!-- Admin2 Column -->
-        <ng-container matColumnDef="Admin2">
-            <th mat-header-cell *matHeaderCellDef>
-                Admin2
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Admin2 === ""? "-":element.Admin2}}
-            </td>
-        </ng-container>
-        <!-- Province_State Column -->
-        <ng-container matColumnDef="Province_State">
-            <th mat-header-cell *matHeaderCellDef>
-                Province_State
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Province_State === ""? "-":element.Province_State}}
-            </td>
-        </ng-container>
-        <!-- Country_Region Column -->
-        <ng-container matColumnDef="Country_Region">
-            <th mat-header-cell *matHeaderCellDef>
-                Country_Region
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Country_Region === ""? "-":element.Country_Region}}
-            </td>
-        </ng-container>
-        <!-- Last_Update Column -->
-        <ng-container matColumnDef="Last_Update">
-            <th mat-header-cell *matHeaderCellDef>
-                Last_Update
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Last_Update === ""? "-":element.Last_Update}}
-            </td>
-        </ng-container>
-        <!-- Lat Column -->
-        <ng-container matColumnDef="Lat">
-            <th mat-header-cell *matHeaderCellDef>
-                Lat
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Lat === ""? "-":element.Lat}}
-            </td>
-        </ng-container>
+    <!-- Province_State Column -->
+   
+    <!-- Country_Region Column -->
+    <ng-container matColumnDef="Country_Region">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef>Country_Region</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.Country_Region === "" ? "-" : element.Country_Region }}
+      </td>
+    </ng-container>
+    <!-- Last_Update Column -->
 
-        <!-- Long_ Column -->
-        <ng-container matColumnDef="Long_">
-            <th mat-header-cell *matHeaderCellDef>
-                Long_
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Long_ === ""? "-":element.Long_}}
-            </td>
-        </ng-container>
-        <!-- Confirmed Column -->
-        <ng-container matColumnDef="Confirmed">
-            <th mat-header-cell *matHeaderCellDef>
-                Confirmed
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Confirmed === ""? "-":element.Confirmed}}
-            </td>
-        </ng-container>
-        <!-- Deaths Column -->
-        <ng-container matColumnDef="Deaths">
-            <th mat-header-cell *matHeaderCellDef>
-                Deaths
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Deaths === ""? "-":element.Deaths}}
-            </td>
-        </ng-container>
-        <!-- Recovered Column -->
-        <ng-container matColumnDef="Recovered">
-            <th mat-header-cell *matHeaderCellDef>
-                Recovered
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Recovered === ""? "-":element.Recovered}}
-            </td>
-        </ng-container>
-        <!-- Active Column -->
-        <ng-container matColumnDef="Active">
-            <th mat-header-cell *matHeaderCellDef>
-                Active
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Active === ""? "-":element.Active}}
-            </td>
-        </ng-container>
-        <!-- Combined_Key Column -->
-        <ng-container matColumnDef="Combined_Key">
-            <th mat-header-cell *matHeaderCellDef>
-                Combined_Key
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Combined_Key === ""? "-":element.Combined_Key}}
-            </td>
-        </ng-container>
+    <!-- Lat Column -->
+    <ng-container matColumnDef="Lat">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef>Lat</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.Lat === "" ? "-" : element.Lat }}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="Incident_Rate">
-            <th mat-header-cell *matHeaderCellDef>
-                Incident_Rate
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Incident_Rate === ""? "-":element.Incident_Rate}}
-            </td>
-        </ng-container>
-        <!-- Case_Fatality_Ratio Column -->
-        <ng-container matColumnDef="Case_Fatality_Ratio">
-            <th mat-header-cell *matHeaderCellDef>
-                Case_Fatality_Ratio
-            </th>
-            <td mat-cell *matCellDef="let element">
-                {{element.Case_Fatality_Ratio === ""? "-":element.Case_Fatality_Ratio}}
-            </td>
-        </ng-container>
+    <!-- Long_ Column -->
+    <ng-container matColumnDef="Long_">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef>Long_</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.Long_ === "" ? "-" : element.Long_ }}
+      </td>
+    </ng-container>
+    <!-- Confirmed Column -->
 
-        <tr mat-header-row *matHeaderRowDef="rawDataHeader"></tr>
-        <tr mat-row *matRowDef="let row; columns: rawDataHeader;"></tr>
-    </table>
-    <mat-paginator
+    <!-- Deaths Column -->
+
+    <!-- Recovered Column -->
+ 
+    <!-- Active Column -->
+  
+    <!-- Combined_Key Column -->
+  
+    <!-- Case_Fatality_Ratio Column -->
+    <ng-container matColumnDef="Case_Fatality_Ratio">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef>
+        Case_Fatality_Ratio
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{
+          element.Case_Fatality_Ratio === "" ? "-" : element.Case_Fatality_Ratio
+        }}
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="rawDataHeader; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: rawDataHeader"></tr>
+  </table>
+
+  <mat-paginator
     #paginator
-    [pageSize]="2" 
-    [pageSizeOptions]="[2,5, 10, 20]"
-    showFirstLastButtons>
-    </mat-paginator>
+    [pageSize]="2"
+    [pageSizeOptions]="[2, 5, 10, 20]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>
 
-
-     public rawDataHeader: string[] = [
-    'FIPS',
-    'Admin2',
-    'Province_State',
-    'Country_Region',
-    'Last_Update',
-    'Lat',
-    'Long_',
-    'Confirmed',
-    'Deaths',
-    'Recovered',
-    'Active',
-    'Combined_Key',
-    'Incident_Rate',
-    'Case_Fatality_Ratio',
-  ];
+else{
+        function unique(arr1:any,arr2:any,uniqueArr:any) {
+          for(var i=0; i<arr1.length; i++) {
+              let flag = 0;
+              for(var j=0; j<arr2.length; j++) {
+                  if(arr1[i] === arr2[j]) {
+                      arr2.splice(j,1);
+                      j--;
+                      flag = 1;
+                  }
+              }
+        
+              if(flag == 0) {
+                  uniqueArr.push(arr1[i]);
+              }
+          }
+          uniqueArr.push(arr2);
+          return uniqueArr;
+      }
+        
+      var uniqueArr: string[] = [];
+      console.log("Unique elements in the two arrays are:");
+      console.log(unique(this.rawDataHeader.slice(5),this.additionalHeader,uniqueArr).flat());
+      }
+      

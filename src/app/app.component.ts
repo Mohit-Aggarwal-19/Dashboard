@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DummyComponent } from './dummy/dummy.component';
 import { NullComponent } from './null/null.component';
 
 @Component({
@@ -9,19 +10,17 @@ import { NullComponent } from './null/null.component';
 })
 export class AppComponent implements OnInit {
   public isMenuOpen: boolean = false;
-  public title?:string;
+  public title?: string;
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
   public onSidenavClick(): void {
     this.isMenuOpen = false;
   }
   constructor(private _router: Router) {}
- 
+
   ngOnInit(): void {
     this.onClickDisplayCharts();
-    this.title="Welcome to dashboard"
-
+    this.title = 'Welcome to dashboard';
   }
 
   onClickDisplayTable() {
@@ -34,6 +33,6 @@ export class AppComponent implements OnInit {
     this._router.navigate(['Charts']);
   }
   onClickDisplayData() {
-    this._router.navigate([NullComponent]);
+    this._router.navigate(['dummy']);
   }
 }

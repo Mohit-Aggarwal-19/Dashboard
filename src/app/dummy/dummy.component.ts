@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -6,11 +7,11 @@ import { IRootObject } from 'src/app/Interfaces/rootObject';
 import { FormControl } from '@angular/forms';
 import { FetchDataFromApiService } from 'src/app/services/fetch-data-from-api.service';
 @Component({
-  selector: 'app-tables',
-  templateUrl: './tables.component.html',
-  styleUrls: ['./tables.component.css'],
+  selector: 'app-dummy',
+  templateUrl: './dummy.component.html',
+  styleUrls: ['./dummy.component.css'],
 })
-export class TablesComponent implements OnInit {
+export class DummyComponent implements OnInit {
   public data?: IRootObject;
   public rawData?: any;
   public dataSource!: MatTableDataSource<any>;

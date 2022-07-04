@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select an option</mat-label>
+                    <mat-select [formControl]="headings" multiple
+                        [disabled]="data ? !disableSelect.disabled : disableSelect.disabled">
+                        <mat-select-trigger>
+                            {{headings.value?.[0]||''}}
+                            <span *ngIf="(headings.value?.length || 0) > 1" class="example-additional-selection">
+                                (+{{ (headings.value?.length || 0) - 1
+                                }}{{ headings.value?.length === 2 ? "other" : "others" }})
+                            </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let col of headers" #matOption [value]="col"
+                            (click)="onSelectOption($event, matOption.selected)">{{ col }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-raised-button color="primary"
+                    [disabled]="data ? !disableSelect.disabled : disableSelect.disabled" (click)="addColoumns()">
+                    Add Coloumns
+                </button>
+            </div>
+            <!-- <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select an option</mat-label>
+                    <mat-select [formControl]="deHeadings" multiple
+                        [disabled]="deSelectorFlag ? !disableSelect.disabled : disableSelect.disabled">
+                        <mat-select-trigger>
+                            {{deHeadings.value?.[0]||''}}
+                            <span *ngIf="(deHeadings.value?.length || 0) > 1" class="example-additional-selection">
+                                (+{{ (deHeadings.value?.length || 0) - 1
+                                }}{{ deHeadings.value?.length === 2 ? "other" : "others" }})
+                            </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let col of additionalHeader" #matOption [value]="col"
+                            (click)="onDeSelectOption($event, matOption.selected)">{{ col }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-raised-button color="primary"
+                    [disabled]="deSelectorFlag ? !disableSelect.disabled : disableSelect.disabled" (click)="RemoveColoumns()">
+                    Remove Coloumns
+                </button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div *ngIf="!data" class="setMatScrollerToCenter">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="data" class="scrollable">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+            <ng-container [matColumnDef]="col" *ngFor="let col of rawDataHeader">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef>{{ col }}</th>
+                <td mat-cell *matCellDef="let data">
+                    {{ data[col] === "" ? "-" : data[col] }}
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="rawDataHeader; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: rawDataHeader"></tr>
+        </table>
+
+        <mat-paginator #paginator [pageSize]="2" [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>

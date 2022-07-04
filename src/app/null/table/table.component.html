@@ -1,0 +1,23 @@
+<div *ngIf="!data" class="setMatScrollerToCenter">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="data" class="scrollable">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <ng-container [matColumnDef]="col" *ngFor="let col of rawDataHeader">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef>{{ col }}</th>
+      <td mat-cell *matCellDef="let data">
+        {{ data[col] === "" ? "-" : data[col] }}
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="rawDataHeader; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: rawDataHeader"></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [pageSize]="2"
+    [pageSizeOptions]="[2, 5, 10, 20]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>
