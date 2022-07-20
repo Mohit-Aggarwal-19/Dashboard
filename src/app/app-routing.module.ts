@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'Tables', component: TablesComponent },
   { path: 'Charts', component: ChartsComponent },
   { path: 'dummy', component: DummyComponent },
+  //{ path: '**', component: NullComponent },
+
 ];
 
 @NgModule({

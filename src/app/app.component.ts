@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DummyComponent } from './dummy/dummy.component';
 import { NullComponent } from './null/null.component';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
   constructor(private _router: Router) {}
 
   ngOnInit(): void {
-    this.onClickDisplayCharts();
+    this.onClickDisplayData();
     this.title = 'Welcome to dashboard';
   }
 
@@ -30,9 +31,10 @@ export class AppComponent implements OnInit {
 
   onClickDisplayCharts() {
     console.log('display charts works');
-    this._router.navigate(['Charts']);
+    this._router.navigate([NullComponent]);
   }
   onClickDisplayData() {
+    console.log("display dummy works");
     this._router.navigate(['dummy']);
   }
 }

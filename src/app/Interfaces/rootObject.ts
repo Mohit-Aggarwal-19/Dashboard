@@ -60,3 +60,11 @@ export interface IRootObject {
     apiSourceCode: string;
     rawData: RawData[];
 }
+
+export interface ICountForMapData
+{
+    Death:{[Country: string]: any};
+    Confirmed:{[Country: string]: any};
+    Case_Fatality_Ratio:{[Country: string]: any};
+    Incident_Rate:{[Country: string]: any};
+}

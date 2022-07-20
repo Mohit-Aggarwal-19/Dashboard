@@ -8,13 +8,14 @@ import { TablesComponent } from './tables/tables.component';
 import { ChartsComponent } from './charts/charts.component';
 import { NullComponent } from './null/null.component';
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppUiModule } from './app-ui/app-ui.module';
 import { HighchartsChartModule } from 'highcharts-angular';
-import {  ReactiveFormsModule } from '@angular/forms';
-import { TableComponent } from './null/table/table.component';
-import { DummyComponent } from './dummy/dummy.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { DummyComponent } from './dummy/dummy.component';
+import { FetchDataFromApiService } from './services/fetch-data-from-api.service';
+import { ReadMapJSONService } from './services/read-map-json.service';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,7 @@ import { DummyComponent } from './dummy/dummy.component';
     TablesComponent,
     ChartsComponent,
     NullComponent,
-    TableComponent,
-    DummyComponent
+    DummyComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,11 +31,10 @@ import { DummyComponent } from './dummy/dummy.component';
     HttpClientModule,
     AppUiModule,
     HighchartsChartModule,
-    
-    ReactiveFormsModule
-   
+    ReactiveFormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [FetchDataFromApiService,
+  ReadMapJSONService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
