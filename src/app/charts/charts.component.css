@@ -1,0 +1,16 @@
+p {
+  font-family: Lato;
+}
+.setMatScrollerToCenter {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+html, body {
+  height: 100%;
+}
+
+.full-height {
+  height: 100%;
+}

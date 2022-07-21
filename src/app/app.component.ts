@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   constructor(private _router: Router) {}
 
   ngOnInit(): void {
-    this.onClickDisplayData();
+    this.onClickDisplayCharts();
     this.title = 'Welcome to dashboard';
   }
 
@@ -31,10 +31,10 @@ export class AppComponent implements OnInit {
 
   onClickDisplayCharts() {
     console.log('display charts works');
-    this._router.navigate([NullComponent]);
+    this._router.navigate(['Charts']);
   }
-  onClickDisplayData() {
-    console.log("display dummy works");
-    this._router.navigate(['dummy']);
+  onClickDisplayNotFound() {
+    console.log("display Not-Found works");
+    this._router.navigate(['Not-Found']);
   }
 }

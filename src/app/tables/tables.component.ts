@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { IRootObject } from 'src/app/Interfaces/rootObject';
 import { FormControl } from '@angular/forms';
 import { FetchDataFromApiService } from 'src/app/services/fetch-data-from-api.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.css'],
 })
-export class TablesComponent implements OnInit {
+export class TablesComponent implements OnInit,OnDestroy {
+  newSubscription?: Subscription;
   public data?: IRootObject;
   public rawData?: any;
   public dataSource!: MatTableDataSource<any>;
@@ -42,7 +44,7 @@ export class TablesComponent implements OnInit {
     'Case_Fatality_Ratio',
   ];
   public lenInitial = this.rawDataHeader.length;
-  constructor(private _fetchDataFromAPI: FetchDataFromApiService) {}
+  constructor(private _fetchDataFromAPI: FetchDataFromApiService) { }
 
   @ViewChild(MatSort) set matSort(ms: MatSort) {
     this.sort = ms;
@@ -55,7 +57,7 @@ export class TablesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._fetchDataFromAPI.getData().subscribe((res) => {
+    this.newSubscription=this._fetchDataFromAPI.getData().subscribe((res) => {
       this.data = res;
       this.rawData = this.data['rawData'];
       this.dataSource = new MatTableDataSource(this.rawData);
@@ -104,5 +106,9 @@ export class TablesComponent implements OnInit {
       this.additionalHeader.splice(index, 1);
       console.log('new additional header', this.additionalHeader);
     }
+  }
+  ngOnDestroy(): void {
+    this.newSubscription?.unsubscribe();
+    
   }
 }
